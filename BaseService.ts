@@ -5,9 +5,13 @@ import { Page } from './Page';
 
 export interface BaseService<T> {
 
+  /**
+   */
   loading: boolean
 
   page: Page<T>
+
+  searchParams: any
 
   /**
    * 数据查询
