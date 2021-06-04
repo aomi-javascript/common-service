@@ -2,6 +2,24 @@
 # yarn lockfile v1
 
 
+"@aomi/utils@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@aomi/utils/-/utils-1.0.1.tgz#2c0ca46676f1a8713dff513885b59c1ef754988e"
+  integrity sha512-i9GzTPL4SZ68CalQVAVZubgNF8ckkxO5Bvkn/PpDJPjJCypVx3kL6Ik24LUqtW7RfVx9aJNWxNS9W+47KRdHFQ==
+  optionalDependencies:
+    moment "^2.29.1"
+    object-path "^0.11.5"
+
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
+object-path@^0.11.5:
+  version "0.11.5"
+  resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.5.tgz#d4e3cf19601a5140a55a16ad712019a9c50b577a"
+  integrity sha512-jgSbThcoR/s+XumvGMTMf81QVBmah+/Q7K7YduKeKVWL7N111unR2d6pZZarSk6kY/caeNxUDyxOvMWyzoU2eg==
+
 typescript@^4.2.4:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
