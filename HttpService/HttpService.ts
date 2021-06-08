@@ -1,8 +1,8 @@
 import { ObjectUtils } from '@aomi/utils/ObjectUtils';
 import { urlArgs } from '@aomi/utils/HttpUtil';
 
-import { HttpMethod } from './constants/HttpMethod';
-import ErrorCode from './constants/ErrorCode';
+import { HttpMethod } from '../constants/HttpMethod';
+import ErrorCode from '../constants/ErrorCode';
 
 export interface Params extends RequestInit {
   body?: any
@@ -16,13 +16,21 @@ const config: ConfigOption = {
    * 默认GET请求参数
    * 比如、设置默认的分页大小排序规则等
    */
-  defaultGetArgs: {},
+  getArgs: {},
+
+  contentType: 'application/json; charset=UTF-8',
 
   onDownload: handleWebFileDownload
 };
 
 export type ConfigOption = {
-  defaultGetArgs?: object
+  getArgs?: object
+
+  /**
+   * 默认的Content-Type
+   */
+  contentType?: string
+
   /**
    * 处理文件下载
    */
@@ -30,9 +38,9 @@ export type ConfigOption = {
 }
 
 export function configure(options: ConfigOption) {
-  const { defaultGetArgs } = options;
-  if (defaultGetArgs) {
-    config.defaultGetArgs = ObjectUtils.deepmerge(config.defaultGetArgs, defaultGetArgs);
+  const { getArgs } = options;
+  if (getArgs) {
+    config.getArgs = ObjectUtils.deepmerge(config.getArgs, getArgs);
   }
 }
 
@@ -82,15 +90,15 @@ export async function execute({ method = HttpMethod.GET, url, timeout = 60000, u
 
   // 自动设置为JSON格式
   if (method.toUpperCase() !== HttpMethod.GET && !upload) {
-    reqArgs.headers['Content-Type'] = 'application/json; charset=UTF-8';
+    reqArgs.headers['Content-Type'] = config.contentType;
   }
 
   // GET 请求自动把body转换为URL参数
   if (!method || method === HttpMethod.GET) {
     const newBody = reqArgs.body || {};
     let newParams: any = {
+      ...config.getArgs,
       ...newBody,
-      ...config.defaultGetArgs
     };
     let separator = url.includes('?') ? '&' : '?';
     newUrl = `${url}${separator}${urlArgs(newParams)}`;
