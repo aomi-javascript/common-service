@@ -3,7 +3,7 @@ export type FeeRateType = 'CAP' | 'PERCENTAGE' | 'CAP_PERCENTAGE';
 /**
  * 费率类型
  */
-export const feeRateType: Record<string, FeeRateType> = {
+export const feeRateType: any = {
   cap: 'CAP',
   percentage: 'PERCENTAGE',
   capPercentage: 'CAP_PERCENTAGE'
