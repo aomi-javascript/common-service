@@ -45,7 +45,7 @@ export function setUriFromBase(path: { [key: string]: ResourceUri | string }, pr
         if (['base', 'query', 'detail', 'create', 'update'].includes(item)) {
           return;
         }
-        action[item] = `${action.base}/${key}`;
+        action[item] = `${action.base}/${action[key] || key}`;
       });
       path[key] = action;
     }
