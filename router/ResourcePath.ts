@@ -41,6 +41,12 @@ export function setUriFromBase(path: { [key: string]: ResourceUri | string }, pr
       action.detail = `${action.base}/detail`;
       action.create = `${action.base}/create`;
       action.update = `${action.base}/update`;
+      Object.keys(action).forEach((item: any) => {
+        if (['base', 'query', 'detail', 'create', 'update'].includes(item)) {
+          return;
+        }
+        action[item] = `${action.base}/${key}`;
+      });
       path[key] = action;
     }
   });
