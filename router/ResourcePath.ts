@@ -29,9 +29,12 @@ export type ResourceUri = {
  * 根据base地址直接生成对应的,query,detail,create,update地址
  * @param path
  * @param prefix
+ * @param ignorePathKey 忽略不添加前缀的key
  */
-export function setUriFromBase(path: { [key: string]: ResourceUri | string }, prefix: string = '') {
+export function setUriFromBase(path: { [key: string]: ResourceUri | string }, prefix: string = '', ignorePathKey: Array<string> = []) {
   Object.keys(path).forEach(key => {
+    if (ignorePathKey.includes(key))
+      return;
     const action: ResourceUri | string = path[key];
     if (typeof action === 'string') {
       path[key] = `${prefix}${path[key]}`;
