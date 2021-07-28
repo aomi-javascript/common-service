@@ -1,6 +1,6 @@
 {
   "name": "@aomi/common-service",
-  "version": "1.0.5-Alpha.11",
+  "version": "1.0.5-Alpha.12",
   "main": "index.js",
   "repository": "git@github.com:aomi-web/common-service.git",
   "author": "sean <sean.snow@live.com>",
