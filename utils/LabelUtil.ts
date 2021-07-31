@@ -1,7 +1,5 @@
 export type Label = { key: string; value: any };
 
-export type LabelKeyOption = { label: string; value: string };
-
 export class LabelUtil {
   /**
    * 转换数组形式的label为对象形式
