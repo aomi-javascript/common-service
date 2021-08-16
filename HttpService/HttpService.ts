@@ -4,11 +4,21 @@ import { urlArgs } from '@aomi/utils/HttpUtil';
 import { HttpMethod } from '../constants/HttpMethod';
 import ErrorCode from '../constants/ErrorCode';
 
-export interface Params extends RequestInit {
+export interface HttpRequest extends RequestInit {
   body?: any
   url: string
   timeout?: number
   upload?: boolean
+}
+
+export type HttpResponse = {
+  status: string
+  success: boolean
+  describe?: string
+  payload?: any
+
+  download?: boolean
+  response?: Response
 }
 
 const config: ConfigOption = {
@@ -79,7 +89,7 @@ function handleTimeout(promise: Promise<Response>, timeout: number): Promise<Res
 /**
  * 执行网络请求
  */
-export async function execute({ method = HttpMethod.GET, url, timeout = 60000, upload, headers = {}, ...other }: Params) {
+export async function execute({ method = HttpMethod.GET, url, timeout = 60000, upload, headers = {}, ...other }: HttpRequest): Promise<HttpResponse> {
   const reqArgs: any = {
     credentials: 'include',
     ...other,
@@ -107,13 +117,20 @@ export async function execute({ method = HttpMethod.GET, url, timeout = 60000, u
     reqArgs.body = JSON.stringify(reqArgs.body);
   }
 
-  let res: any = {};
+  let res: HttpResponse = {
+    status: ErrorCode.EXCEPTION,
+    success: false,
+  };
   try {
     console.log(`request ${newUrl}`, reqArgs);
     let response = await handleTimeout(fetch(newUrl, reqArgs), timeout);
     if (response.ok) {
       if (isDownload(response)) {
         config.onDownload && await config.onDownload(url, response);
+        res.download = true;
+        res.success = true;
+        res.status = ErrorCode.SUCCESS;
+        res.response = response;
       } else {
         res = await response.json();
       }

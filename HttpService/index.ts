@@ -1,7 +1,8 @@
-import { ConfigOption, configure, execute, handleWebFileDownload, isDownload, Params } from './HttpService';
+import { ConfigOption, configure, execute, handleWebFileDownload, isDownload, HttpRequest, HttpResponse } from './HttpService';
 
 export {
-  Params,
+  HttpRequest,
+  HttpResponse,
   ConfigOption,
   configure,
   handleWebFileDownload,
