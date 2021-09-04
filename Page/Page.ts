@@ -13,5 +13,5 @@ export const DEFAULT_PAGE: Page<any> = {
   number: 0,
   content: [],
   first: true,
-  last: true
+  last: false
 };
