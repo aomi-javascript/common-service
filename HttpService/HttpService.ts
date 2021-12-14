@@ -5,10 +5,10 @@ import { HttpMethod } from '../constants/HttpMethod';
 import ErrorCode from '../constants/ErrorCode';
 
 export interface HttpRequest extends RequestInit {
-  body?: any
-  url: string
-  timeout?: number
-  upload?: boolean
+  body?: any;
+  url: string;
+  timeout?: number;
+  upload?: boolean;
 }
 
 export type HttpResponse = {
@@ -21,6 +21,19 @@ export type HttpResponse = {
   response?: Response
 }
 
+
+export type ConfigOption = {
+  getArgs?: object
+
+  requestArgs?: Omit<HttpRequest, 'url'>
+
+  /**
+   * 处理文件下载
+   */
+  onDownload?: (url: string, response: Response) => Promise<void>
+}
+
+
 const config: ConfigOption = {
   /**
    * 默认GET请求参数
@@ -28,24 +41,14 @@ const config: ConfigOption = {
    */
   getArgs: {},
 
-  contentType: 'application/json; charset=UTF-8',
+  requestArgs: {
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    }
+  },
 
   onDownload: handleWebFileDownload
 };
-
-export type ConfigOption = {
-  getArgs?: object
-
-  /**
-   * 默认的Content-Type
-   */
-  contentType?: string
-
-  /**
-   * 处理文件下载
-   */
-  onDownload?: (url: string, response: Response) => Promise<void>
-}
 
 export function configure(options: ConfigOption) {
   const { getArgs } = options;
@@ -90,17 +93,16 @@ function handleTimeout(promise: Promise<Response>, timeout: number): Promise<Res
  * 执行网络请求
  */
 export async function execute({ method = HttpMethod.GET, url, timeout = 60000, upload, headers = {}, ...other }: HttpRequest): Promise<HttpResponse> {
-  const reqArgs: any = {
-    credentials: 'include',
+  const reqArgs: any = ObjectUtils.deepmerge({
     ...other,
     method,
     headers
-  };
+  }, config.requestArgs);
   let newUrl = url;
 
   // 自动设置为JSON格式
-  if (method.toUpperCase() !== HttpMethod.GET && !upload) {
-    reqArgs.headers['Content-Type'] = config.contentType;
+  if (method.toUpperCase() === HttpMethod.GET || upload) {
+    reqArgs.headers['Content-Type'] = undefined;
   }
 
   // GET 请求自动把body转换为URL参数
@@ -108,7 +110,7 @@ export async function execute({ method = HttpMethod.GET, url, timeout = 60000, u
     const newBody = reqArgs.body || {};
     let newParams: any = {
       ...config.getArgs,
-      ...newBody,
+      ...newBody
     };
     let separator = url.includes('?') ? '&' : '?';
     newUrl = `${url}${separator}${urlArgs(newParams)}`;
@@ -119,7 +121,7 @@ export async function execute({ method = HttpMethod.GET, url, timeout = 60000, u
 
   let res: HttpResponse = {
     status: ErrorCode.EXCEPTION,
-    success: false,
+    success: false
   };
   try {
     console.log(`request ${newUrl}`, reqArgs);
