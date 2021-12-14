@@ -102,7 +102,7 @@ export async function execute({ method = HttpMethod.GET, url, timeout = 60000, u
 
   // 自动设置为JSON格式
   if (method.toUpperCase() === HttpMethod.GET || upload) {
-    reqArgs.headers['Content-Type'] = undefined;
+    Reflect.deleteProperty(reqArgs.headers, 'Content-Type');
   }
 
   // GET 请求自动把body转换为URL参数
