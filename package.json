@@ -5,6 +5,7 @@
   "repository": "git@github.com:aomi-web/common-service.git",
   "author": "sean <sean.snow@live.com>",
   "license": "MIT",
+  "miniprogram": ".",
   "scripts": {
     "clean": "find . -path \"./node_modules\" -prune -o -name \"*.js\" -o -name \"*.js.map\" -o -name \"*.d.ts\" |xargs rm -f | echo ''",
     "build": "tsc -d",
