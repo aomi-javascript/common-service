@@ -15,3 +15,18 @@ export const DEFAULT_PAGE: Page<any> = {
   first: true,
   last: false
 };
+
+export type PageRequest = {
+  /**
+   * 每页大小
+   */
+  size: number,
+  /**
+   * 页码
+   */
+  page: number,
+  /**
+   * 排序
+   */
+  sort: string
+}
