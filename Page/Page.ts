@@ -1,5 +1,6 @@
 export interface Page<T> {
   totalElements: number
+  totalPages: number
   size: number
   number: number
   content: Array<T>
@@ -9,6 +10,7 @@ export interface Page<T> {
 
 export const DEFAULT_PAGE: Page<any> = {
   totalElements: 0,
+  totalPages: 0,
   size: 0,
   number: 0,
   content: [],
