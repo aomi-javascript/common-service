@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "esnext",
     "target": "esnext",
     "sourceMap": true,
-    "jsx": "react",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
@@ -15,8 +14,13 @@
       "dom",
       "es2018"
     ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true,
+    "outDir": "esm"
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
     "node_modules",
     "build",

@@ -1,7 +1,6 @@
-import { ObjectUtils } from '@aomi/utils/ObjectUtils';
-import { urlArgs } from '@aomi/utils/HttpUtil';
+import {ObjectUtils, urlArgs} from '@aomi/utils';
 
-import { HttpMethod } from '../constants/HttpMethod';
+import {HttpMethod} from '../constants';
 import ErrorCode from '../constants/ErrorCode';
 
 export interface HttpRequest extends RequestInit {
@@ -51,7 +50,7 @@ const config: ConfigOption = {
 };
 
 export function configure(options: ConfigOption) {
-  const { getArgs } = options;
+  const {getArgs} = options;
   if (getArgs) {
     config.getArgs = ObjectUtils.deepmerge(config.getArgs, getArgs);
   }
@@ -92,7 +91,14 @@ function handleTimeout(promise: Promise<Response>, timeout: number): Promise<Res
 /**
  * 执行网络请求
  */
-export async function execute({ method = HttpMethod.GET, url, timeout = 60000, upload, headers = {}, ...other }: HttpRequest): Promise<HttpResponse> {
+export async function execute({
+                                method = HttpMethod.GET,
+                                url,
+                                timeout = 60000,
+                                upload,
+                                headers = {},
+                                ...other
+                              }: HttpRequest): Promise<HttpResponse> {
   const reqArgs: any = ObjectUtils.deepmerge({
     ...other,
     method,
