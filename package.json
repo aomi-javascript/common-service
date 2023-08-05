@@ -10,9 +10,81 @@
   "miniprogram": ".",
   "scripts": {
     "clean": "find . -path \"./node_modules\" -prune -o -name \"*.js\" -o -name \"*.js.map\" -o -name \"*.d.ts\" |xargs rm -f | echo ''",
-    "build": "rm -rf esm cjs && tsc -d && tsc --project tsconfig.cjs.json",
+    "build": "rm -rf esm cjs types && tsc -d && tsc --project tsconfig.cjs.json",
     "watch": "tsc -d && tsc -w",
     "prepublishOnly": "yarn build"
+  },
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "types": "./types/index.d.ts",
+      "require": "./cjs/index.js"
+    },
+    "./BankCardType": {
+      "import": "./esm/BankCardType/index.js",
+      "types": "./types/BankCardType/index.d.ts",
+      "require": "./cjs/BankCardType/index.js"
+    },
+    "./BaseService": {
+      "import": "./esm/BaseService/index.js",
+      "types": "./types/BaseService/index.d.ts",
+      "require": "./cjs/BaseService/index.js"
+    },
+    "./BusinessLicense": {
+      "import": "./esm/BusinessLicense/index.js",
+      "types": "./types/BusinessLicense/index.d.ts",
+      "require": "./cjs/BusinessLicense/index.js"
+    },
+    "./exception": {
+      "import": "./esm/exception/index.js",
+      "types": "./types/exception/index.d.ts",
+      "require": "./cjs/exception/index.js"
+    },
+    "./FaPiao": {
+      "import": "./esm/FaPiao/index.js",
+      "types": "./types/FaPiao/index.d.ts",
+      "require": "./cjs/FaPiao/index.js"
+    },
+    "./FeeRate": {
+      "import": "./esm/FeeRate/index.js",
+      "types": "./types/FeeRate/index.d.ts",
+      "require": "./cjs/FeeRate/index.js"
+    },
+    "./Gender": {
+      "import": "./esm/Gender/index.js",
+      "types": "./types/Gender/index.d.ts",
+      "require": "./cjs/Gender/index.js"
+    },
+    "./HttpService": {
+      "import": "./esm/HttpService/index.js",
+      "types": "./types/HttpService/index.d.ts",
+      "require": "./cjs/HttpService/index.js"
+    },
+    "./Page": {
+      "import": "./esm/Page/index.js",
+      "types": "./types/Page/index.d.ts",
+      "require": "./cjs/Page/index.js"
+    },
+    "./region": {
+      "import": "./esm/region/index.js",
+      "types": "./types/region/index.d.ts",
+      "require": "./cjs/region/index.js"
+    },
+    "./ReviewService": {
+      "import": "./esm/ReviewService/index.js",
+      "types": "./types/ReviewService/index.d.ts",
+      "require": "./cjs/ReviewService/index.js"
+    },
+    "./router": {
+      "import": "./esm/router/index.js",
+      "types": "./types/router/index.d.ts",
+      "require": "./cjs/router/index.js"
+    },
+    "./utils": {
+      "import": "./esm/utils/index.js",
+      "types": "./types/utils/index.d.ts",
+      "require": "./cjs/utils/index.js"
+    }
   },
   "devDependencies": {
     "@aomi/utils": "^1.0.10",

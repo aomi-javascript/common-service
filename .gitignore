@@ -35,7 +35,8 @@ build
 log
 logs
 cjs/
-esm
+esm/
+types/
 target
 _site/
 activemq-data
