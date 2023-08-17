@@ -508,7 +508,7 @@ export const counties = [
   ]
 ];
 
-export default provinces.map((province, pIdx) => ({
+export const china = provinces.map((province, pIdx) => ({
   label: province,
   value: province,
   children: cities[pIdx].map((city, cIdx) => ({
@@ -520,3 +520,5 @@ export default provinces.map((province, pIdx) => ({
     }))
   }))
 }))
+
+export default china;
