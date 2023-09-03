@@ -45,6 +45,11 @@
       "types": "./types/constants/index.d.ts",
       "require": "./cjs/constants/index.js"
     },
+    "./decorator/*": {
+      "import": "./esm/decorator/*.js",
+      "types": "./types/decorator/*.d.ts",
+      "require": "./cjs/decorator/*.js"
+    },
     "./exception": {
       "import": "./esm/exception/index.js",
       "types": "./types/exception/index.d.ts",
