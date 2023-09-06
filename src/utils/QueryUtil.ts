@@ -10,12 +10,45 @@ export class QueryUtil {
    * @param createAtRange 创建时间区间
    * @param args
    */
-  static transform({ createAtRange, ...args }: any = {}) {
-    const result = { ...args };
+  static transform({createAtRange, ...args}: any = {}) {
+    const result = {...args};
     if (Array.isArray(createAtRange) && createAtRange.length === 2) {
       result.createStartAt = `${createAtRange[0].format(Common.DATE_FORMAT)} 00:00:00`;
       result.createEndAt = `${createAtRange[1].format(Common.DATE_FORMAT)} 23:59:59`;
     }
     return result;
+  }
+
+  /**
+   * 转换时间相关的参数为
+   * startAt 和 endAt 形式
+   * @param dateRange 开始结束时间
+   * @param namePrefix 名字前缀 默认为 StartAt 和EndAt
+   * @param options 转换选项
+   */
+  static transformDate(dateRange: Array<any>, namePrefix: string, options?: {
+    format?: 'DATE' | 'DATETIME' | 'TIME',
+    /**
+     * 日期添加默认时间
+     * start = 00:00:00
+     * end = 23:59:59
+     */
+    dateWithTime?: boolean
+  }): Record<string, string> {
+    if (dateRange.length != 2) {
+      return {}
+    }
+    const format = options?.format ?? 'DATE'
+    let start = dateRange[0].format(Common[`${format}_FORMAT`])
+    let end = dateRange[1].format(Common[`${format}_FORMAT`])
+    if (format === 'DATE' && options?.dateWithTime) {
+      start = `${start} 00:00:00`;
+      end = `${end} 23:59:59`
+    }
+
+    return {
+      [`${namePrefix}StartAt`]: start,
+      [`${namePrefix}EndAt`]: end
+    }
   }
 }
