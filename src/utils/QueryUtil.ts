@@ -9,6 +9,7 @@ export class QueryUtil {
    * 如果存在`createRange`字段，则转换为 createStartAt 和 createEndAt
    * @param createAtRange 创建时间区间
    * @param args
+   * @deprecated use transformDate
    */
   static transform({createAtRange, ...args}: any = {}) {
     const result = {...args};
@@ -17,6 +18,27 @@ export class QueryUtil {
       result.createEndAt = `${createAtRange[1].format(Common.DATE_FORMAT)} 23:59:59`;
     }
     return result;
+  }
+
+  /**
+   *
+   * @param range
+   * @param namePrefix 名字前缀
+   * @param options
+   */
+  static transformRange(range: Array<any>, namePrefix: string, options?: {
+    /**
+     * 名字后缀 默认 startAt\ endAt
+     */
+    nameSuffix?: Array<string>
+  }) {
+    const {
+      nameSuffix
+    } = options ?? {}
+    return {
+      [`${namePrefix}${nameSuffix?.[0] ?? 'StartAt'}`]: range[0],
+      [`${namePrefix}${nameSuffix?.[1] ?? 'EndAt'}`]: range[1]
+    }
   }
 
   /**
