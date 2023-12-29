@@ -1,12 +1,11 @@
 {
   "name": "@aomi/common-service",
-  "version": "1.0.18",
+  "version": "1.0.20",
   "repository": "git@github.com:aomi-web/common-service.git",
   "author": "sean <sean.snow@live.com>",
   "license": "MIT",
   "main": "cjs/index.js",
   "module": "esm/index.js",
-  "types": "esm/index.d.ts",
   "miniprogram": ".",
   "scripts": {
     "clean": "find . -path \"./node_modules\" -prune -o -name \"*.js\" -o -name \"*.js.map\" -o -name \"*.d.ts\" |xargs rm -f | echo ''",
@@ -16,8 +15,7 @@
   },
   "files": [
     "cjs",
-    "esm",
-    "types"
+    "esm"
   ],
   "exports": {
     ".": {

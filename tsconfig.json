@@ -16,7 +16,6 @@
     ],
     "skipLibCheck": true,
     "declaration": true,
-    "declarationDir": "types",
     "outDir": "esm"
   },
   "include": [
