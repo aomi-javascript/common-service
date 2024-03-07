@@ -58,10 +58,10 @@ export function setUriFromBase(path: { [key: string]: ResourceUri | string }, pr
 /**
  * 生成新增编辑地址，根据基础地址
  * <code>
- *   const path = `${base}/action:(create|update)`
+ *   const path = `${base}/action)`
  * </code>
  * @param base 基础地址
  */
 export function actionPath(base: string) {
-  return `${base}/:action(create|update)`;
+  return `${base}/:action`;
 }
