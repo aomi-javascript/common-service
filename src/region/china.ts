@@ -1,6 +1,6 @@
-import provinces from './provinces.json';
-import cities from './cities.json';
-import counties from './counties.json';
+import {provinces} from './provinces';
+import {cities} from './cities';
+import {counties} from './counties';
 
 
 export {

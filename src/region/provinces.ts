@@ -1,4 +1,4 @@
-[
+export const provinces = [
   {
     "code": "156410000",
     "name": "河南省"

@@ -1,4 +1,4 @@
-[
+export const cities = [
   {
     "code": "156441400",
     "name": "梅州市"

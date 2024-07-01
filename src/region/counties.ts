@@ -1,4 +1,4 @@
-[
+export const counties = [
   {
     "code": "156420704",
     "name": "鄂城区"
